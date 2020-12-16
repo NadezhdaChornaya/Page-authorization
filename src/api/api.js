@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { state } from '../data/data';
 import { refs } from '../refs/refs';
+import { createUsersList } from '../components/users/usersList/usersList'
 
 const API_KEY = 'AIzaSyAMdD72P8Xm-i8RlkhfB7TjQfnZz6jGzfY';
 const signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
@@ -60,10 +61,21 @@ const addToDB = async (data, token) => {
 const getFromDB = () => {
   if (localStorage.getItem('idToken')) {
     const token = JSON.parse(localStorage.getItem('idToken'));
-    console.log('token', token);
+    // console.log('token', token);
     axios
       .get(`${baseURL}/users.json?auth=${token}`)
-      .then(response => console.log(response.data));
+      .then(response => {
+
+        const keys = (Object.keys(response.data));
+
+        const users = keys.reduce((acc, key) => {
+          acc.push({ id: key, ...response.data[key] })
+          return acc;
+        }, [])
+        state.data.users = [...users];
+        createUsersList()
+
+      });
   } else console.log('no token');
 };
 
