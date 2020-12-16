@@ -7,9 +7,7 @@ import { createSignInForm } from './components/auth/forms/signInForm';
 import { createHome } from './components/pages/home';
 import { createUsersList } from './components/users/usersList/usersList';
 createHome();
-
 const getPage = e => {
-  console.log(e.target);
   if (e.target === e.currentTarget) {
     return;
   }
@@ -20,16 +18,15 @@ const getPage = e => {
     case 'signIn':
       createSignInForm();
       break;
-    case 'users':
-      createUsersList();
-      break;
     case 'home':
       createHome();
       break;
     case 'logOut':
       createHome();
       break;
-
+    case 'users':
+      createUsersList();
+      break;
     default:
       createHome();
       break;
