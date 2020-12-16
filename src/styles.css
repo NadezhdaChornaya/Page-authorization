@@ -9,9 +9,9 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .loader {
@@ -19,4 +19,20 @@ body {
 }
 .hidden {
   display: none;
+}
+
+.flexible {
+  display: flex;
+}
+
+.list {
+  list-style: none;
+}
+.list-item {
+  margin-left: 20px;
+  cursor: pointer;
+}
+form {
+  display: flex;
+  flex-direction: column;
 }

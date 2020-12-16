@@ -23,7 +23,7 @@ export const createSignInForm = () => {
   const getUserData = e => {
     if (state.error) {
       document.querySelector('.error').textContent = '';
-      refs.errorIn.textContent = '';
+      // refs.errorIn.textContent = '';
       state.error = '';
     }
     const { name, value } = e.target;
@@ -42,6 +42,9 @@ export const createSignInForm = () => {
           .classList.toggle('hidden');
         refs.navigation
           .querySelector('[data-page="logOut"]')
+          .classList.toggle('hidden');
+        refs.navigation
+          .querySelector('[data-page="users"]')
           .classList.toggle('hidden');
       });
   };

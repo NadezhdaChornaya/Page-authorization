@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { state } from '../data/data';
 import { refs } from '../refs/refs';
-import { createUsersList } from '../components/users/usersList/usersList'
+import { createUsersList } from '../components/users/usersList/usersList';
 
 const API_KEY = 'AIzaSyAMdD72P8Xm-i8RlkhfB7TjQfnZz6jGzfY';
 const signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
@@ -38,7 +38,7 @@ const signIn = async user => {
     localStorage.setItem('idToken', JSON.stringify(response.data.idToken));
     getFromDB();
   } catch (error) {
-    refs.errorIn.textContent = error.response.data.error.message;
+    document.querySelector(".error").textContent = error.response.data.error.message;
     state.error = error.response.data.error.message;
     throw new Error(state.error);
   } finally {
@@ -84,4 +84,13 @@ const getFromDB = () => {
 //   axios.post(`${baseURL}/users.json?auth=${token}`, {email: "test", password: "test"})
 // }
 
-export { signUp, signIn, addToDB, getFromDB, logOut };
+const deleteUserById = (id) => {
+  const token = JSON.parse(localStorage.getItem('idToken'));
+  axios.delete(`${baseURL}/users/${id}.json?auth=${token}`)
+    .then(() => {
+      state.data.users = [...state.data.users.filter(user => user.id !== id)]
+      createUsersList()
+    })
+}
+
+export { signUp, signIn, addToDB, getFromDB, logOut, deleteUserById };

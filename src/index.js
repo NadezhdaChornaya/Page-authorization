@@ -80,6 +80,9 @@ const logOutHandler = () => {
   refs.navigation
     .querySelector('[data-page="logOut"]')
     .classList.toggle('hidden');
+  refs.navigation
+    .querySelector('[data-page="users"]')
+    .classList.toggle('hidden');
 };
 refs.navigation
   .querySelector('[data-page="logOut"]')

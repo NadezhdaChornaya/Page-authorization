@@ -2,6 +2,8 @@
 
 import { refs } from '../../../refs/refs'
 import { state } from '../../../data/data'
+import { deleteUserById } from '../../../api/api'
+import { createUserForm } from '../usersForm/usersForm'
 
 const createUsersMarkup = () => {
     return state.data.users.reduce((acc, user) => {
@@ -17,16 +19,21 @@ const createUsersMarkup = () => {
 
 export const createUsersList = () => {
     refs.content.innerHTML = `
-    <ul class="usersList">${createUsersMarkup()}</ul>
+    <div class="flexible">
+    <ul class="usersList">${createUsersMarkup()}</ul><div class="usersDataContent"></div></div>
     `
     const usersList = document.querySelector('.usersList');
+
     const options = (e) => {
         if (e.target.dataset) {
+            const id = e.target.closest("[data-id]").dataset.id
             if (e.target.dataset.button === "edit") {
-                console.log("edit");
+                const id = e.target.closest("[data-id]").dataset.id
+                createUserForm(id);
             }
             else if (e.target.dataset.button === "delete") {
-                console.log("delete");
+                const id = e.target.closest("[data-id]").dataset.id;
+                deleteUserById(id)
             } else return
         } else return
     }
